@@ -1,0 +1,54 @@
+<aura:component controller="meetingNotehandler" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes" access="global" >
+    <aura:attribute name="meetingnoteInput" type="string"/>
+    <aura:attribute name="componentInput" type="string" />
+    <aura:attribute name="HeaderValue" type="string" />
+    <aura:attribute name="noteData" type="string"/>
+    <aura:attribute name="slotId" type="string"/>
+    <aura:attribute name="eventType" type="string"/>
+    <aura:attribute name="rating" type="string"/>
+    <aura:attribute name="showModal" type="boolean" default="false"/>
+    <aura:attribute name="meetingNote" type="Meeting_Notes__c" default="{'sobjectType':'Meeting_Notes__c'}"/>
+      <aura:attribute name="isButtonActive" type="Boolean" default="true" />
+    <aura:registerEvent name="cmpEvent" type="c:CustomerCommunity_TimelineCarrier"/>
+    
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    
+    <aura:if isTrue="{!v.showModal}">
+        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+                <header class="slds-modal__header">
+                    <lightning:buttonIcon iconName="utility:close"
+                                          onclick="{! c.closeModel }"
+                                          alternativeText="close"
+                                          variant="bare-inverse"
+                                          class="slds-modal__close"/>
+                    <h3>{!v.HeaderValue}</h3>
+                    
+                </header>
+                <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                    <h3>Note</h3>
+                    <lightning:textarea 
+                                        type="String"
+                                        label=""
+                                        value="{!v.meetingNote.Notes__c}"
+                                        messageWhenValueMissing="Enter note"
+                                        />
+                    <br/>
+                    <h3>Quality of Meeting</h3>
+                    <c:CustomerCommunity_Starrating Rating="{!v.meetingNote.Rating__c}"/><br/>
+                    <aura:if isTrue="{!v.eventType == 'Edit'}">
+                        <div class="slds-form-element">    
+                            <button class="slds-button slds-button-brand" onclick="{!c.doSave}">Update</button> 
+                        </div>
+                    </aura:if>
+                    <aura:if isTrue="{!v.eventType == 'Add'}">
+                        <div class="slds-form-element">    
+                             <button class="slds-button slds-button-brand" onclick="{!c.doInsert}">Add</button>
+                        </div>
+                    </aura:if>
+                </div>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </aura:if>
+</aura:component>
