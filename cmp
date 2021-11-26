@@ -1,0 +1,21 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes" access="global" >
+    <!--ltng:require styles="{! $Resource.bootstrap337 + '/bootstrap-4.3.1-dist/css/bootstrap.min.css'}" scripts="{!join(',', 
+                                                                                                               $Resource.jquery331 , 
+                                                                                                               $Resource.popperJs , 
+                                                                                                               $Resource.bootstrap337 + '/bootstrap-4.3.1-dist/js/bootstrap.min.js')
+                                                                                                               }" />
+    <ltng:require styles="{! $Resource.StyleCSS}" /-->   
+    <ltng:require styles="{! $Resource.fontawesome + '/css/font-awesome.min.css'}" /> 
+    
+    <aura:attribute name="Rating" type="string" default="0"/>
+    <aura:handler event="aura:doneRendering" action="{!c.doInit}"/>
+    <!--aura:handler name="init" value="{!this}" action="{!c.doInit}"/-->
+    
+    <div class="col-sm-12 mt-2"> 
+        <i class="fa fa-star fa-lg unchecked" data-record="1" id="1@one" onclick="{!c.starClick}"></i>  
+        <i class="fa fa-star fa-lg unchecked" data-record="2" id="2@two" onclick="{!c.starClick}"></i>
+        <i class="fa fa-star fa-lg unchecked" data-record="3" id="3@three" onclick="{!c.starClick}"></i>
+        <i class="fa fa-star fa-lg unchecked" data-record="4" id="4@four" onclick="{!c.starClick}"></i>
+        <i class="fa fa-star fa-lg unchecked" data-record="5" id="5@five" onclick="{!c.starClick}"></i>
+    </div>
+</aura:component>
