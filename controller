@@ -1,0 +1,45 @@
+({
+    starClick : function(component, event, helper){
+        var selectedItem = event.currentTarget;
+        var indexVal = selectedItem.dataset.record;
+        
+        var splitStr = event.target.id;
+        var splitList = splitStr.split("@");
+        var ide = splitList[1];
+        var ind = splitList[0]+'@';
+        var list=['one','two','three','four','five'];
+        
+        var x = document.getElementsByClassName("checked");
+        for(var j=0;j<x.length;j++){
+            x[j].classList.remove("checked");
+            x[j].classList.add("unchecked");
+        }
+        for(var i=0;i<parseInt(splitList[0]);i++){
+            document.getElementById((i+1)+'@'+list[i]).classList.remove("unchecked");
+            document.getElementById((i+1)+'@'+list[i]).classList.add("checked"); 
+        }
+        
+          
+       component.set("v.Rating",ide);       
+    },
+    
+    doInit : function(component, event, helper){
+        
+        var ratingMap={'one':'1','two':'2','three':'3','four':'4','five':'5'}
+        var list=['one','two','three','four','five'];
+        var currentRating = component.get("v.Rating");
+        if(currentRating != "0" && currentRating != ""){
+        var rate = ratingMap[currentRating];            
+        var x = document.getElementsByClassName("checked");
+        for(var j=0;j<x.length;j++){
+            x[j].classList.remove("checked");
+            x[j].classList.add("unchecked");
+        }
+        
+        for(var i=0;i<parseInt(rate);i++){
+            document.getElementById((i+1)+'@'+list[i]).classList.remove("unchecked");
+            document.getElementById((i+1)+'@'+list[i]).classList.add("checked"); 
+        }
+        }
+    }
+})
